@@ -1,0 +1,58 @@
+
+#include <stdio.h>
+#define MAX 100
+#define INFINITY 9999
+void dijkstra(int n, int graph[MAX][MAX], int start) {
+ int distance[MAX], visited[MAX], i, j, count, min_dist, next_node;
+ // Initialization
+ for (i = 0; i < n; i++) {
+ distance[i] = graph[start][i];
+ visited[i] = 0;
+ }
+ distance[start] = 0;
+ visited[start] = 1;
+ count = 1;
+ while (count < n) {
+ min_dist = INFINITY;
+ next_node = -1;
+ for (i = 0; i < n; i++) {
+ if (!visited[i] && distance[i] < min_dist) {
+ min_dist = distance[i];
+ next_node = i;
+ }
+ }
+ if (next_node == -1) break;
+ visited[next_node] = 1;
+ for (i = 0; i < n; i++) {
+ if (!visited[i] && graph[next_node][i] != INFINITY &&
+ distance[next_node] + graph[next_node][i] < distance[i]) {
+ distance[i] = distance[next_node] + graph[next_node][i];
+ }
+ }
+ count++;
+ }
+ // Output shortest distances
+ printf("\nShortest distances from source vertex %d:\n", start);
+ for (i = 0; i < n; i++) {
+ printf("To vertex %d : %d\n", i, distance[i]);
+ }
+}
+int main() {
+ int n, graph[MAX][MAX], i, j, start;
+ printf("Enter number of vertices: ");
+ scanf("%d", &n);
+ printf("Enter the adjacency matrix (use %d for infinity/no edge):\n", INFINITY);
+ for (i = 0; i < n; i++)
+ for (j = 0; j < n; j++)
+ scanf("%d", &graph[i][j]);
+
+ printf("Enter the source vertex (0 to %d): ", n - 1);
+ scanf("%d", &start);
+ dijkstra(n, graph, start);
+ return 0;
+}
+else
+ current_bucket -= output_rate;
+ }
+ return 0;
+}
